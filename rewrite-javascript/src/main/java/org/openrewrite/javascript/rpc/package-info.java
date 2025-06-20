@@ -13,12 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.openrewrite.config;
+@NullMarked
+@NonNullFields
+package org.openrewrite.javascript.rpc;
 
-import lombok.Value;
-
-@Value
-public class License {
-    String name;
-    String url;
-}
+import org.jspecify.annotations.NullMarked;
+import org.openrewrite.internal.lang.NonNullFields;
