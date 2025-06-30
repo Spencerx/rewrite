@@ -1,3 +1,20 @@
+/*
+ * Copyright 2025 the original author or authors.
+ * <p>
+ * Licensed under the Moderne Source Available License (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * https://docs.moderne.io/licensing/moderne-source-available-license
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import {asRef} from "../rpc";
+
 export interface JavaType {
     readonly kind: string;
 }
@@ -15,7 +32,6 @@ export namespace JavaType {
         Primitive: "org.openrewrite.java.tree.JavaType$Primitive",
         ShallowClass: "org.openrewrite.java.tree.JavaType$ShallowClass",
         Union: "org.openrewrite.java.tree.JavaType$MultiCatch",
-        UniqueSymbol: "org.openrewrite.java.tree.JavaType$UniqueSymbol",
         Unknown: "org.openrewrite.java.tree.JavaType$Unknown",
         Variable: "org.openrewrite.java.tree.JavaType$Variable",
     }
@@ -161,13 +177,9 @@ export namespace JavaType {
         readonly kind: typeof Kind.ShallowClass;
     }
 
-    export interface UniqueSymbol extends JavaType {
-        readonly kind: typeof Kind.UniqueSymbol;
-    }
-
-    export const unknownType: JavaType = {
+    export const unknownType: JavaType = asRef({
         kind: JavaType.Kind.Unknown
-    };
+    });
 
     export function isPrimitive(type?: JavaType): type is JavaType.Primitive {
         return type?.kind === JavaType.Kind.Primitive;
